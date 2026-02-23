@@ -26,6 +26,8 @@ def load_model():
 
 model, expected_features = load_model()
 
+
+
 if model is None:
     st.error("Model not found! Please ensure 'models/churn_model.pkl' and 'models/model_features.pkl' exist.")
 else:
@@ -161,8 +163,7 @@ else:
             for feat in top_features:
                 if any(dem_key in feat for dem_key in demographic_keywords):
                     engagement_is_key = False
-                    break
-                    
+                    break     
             if engagement_is_key:
                 st.caption("Note: Engagement behavior is more influential than demographics (e.g., age, gender, location).")
             
