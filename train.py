@@ -42,6 +42,34 @@ def main():
 
     metrics_all = {}
 
+    # ------------------------------------------------------------------
+    # 2. Train Random Forest
+    # ------------------------------------------------------------------
+    print("\nTraining Random Forest...")
+    rf = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
+    rf.fit(X_train, y_train)
+    rf_preds = rf.predict(X_test)
+
+    rf_metrics = {
+        "accuracy": round(accuracy_score(y_test, rf_preds), 4),
+        "precision": round(precision_score(y_test, rf_preds, zero_division=0), 4),
+        "recall": round(recall_score(y_test, rf_preds, zero_division=0), 4),
+        "f1_score": round(f1_score(y_test, rf_preds, zero_division=0), 4),
+    }
+
+    print("  Running 5-fold cross-validation...")
+    rf_cv = cross_val_score(rf, X, y, cv=5, scoring="accuracy", n_jobs=-1)
+    rf_metrics["cv_scores"] = [round(s, 4) for s in rf_cv.tolist()]
+    rf_metrics["cv_mean"] = round(rf_cv.mean(), 4)
+    print(f"  CV scores: {rf_metrics['cv_scores']}")
+    print(f"  CV mean:   {rf_metrics['cv_mean']}")
+    print(f"  Accuracy:  {rf_metrics['accuracy']}")
+    print(f"  Precision: {rf_metrics['precision']}")
+    print(f"  Recall:    {rf_metrics['recall']}")
+    print(f"  F1 Score:  {rf_metrics['f1_score']}")
+
+    metrics_all["random_forest"] = rf_metrics
+
     print("\nTraining completed successfully.")
 
 
