@@ -70,6 +70,49 @@ def main():
 
     metrics_all["random_forest"] = rf_metrics
 
+    # ------------------------------------------------------------------
+    # 3. Train Logistic Regression
+    # ------------------------------------------------------------------
+    print("\nTraining Logistic Regression...")
+    lr = LogisticRegression(max_iter=1000, random_state=42)
+    lr.fit(X_train, y_train)
+    lr_preds = lr.predict(X_test)
+
+    lr_metrics = {
+        "accuracy": round(accuracy_score(y_test, lr_preds), 4),
+        "precision": round(precision_score(y_test, lr_preds, zero_division=0), 4),
+        "recall": round(recall_score(y_test, lr_preds, zero_division=0), 4),
+        "f1_score": round(f1_score(y_test, lr_preds, zero_division=0), 4),
+    }
+
+    print("  Running 5-fold cross-validation...")
+    lr_cv = cross_val_score(lr, X, y, cv=5, scoring="accuracy", n_jobs=-1)
+    lr_metrics["cv_scores"] = [round(s, 4) for s in lr_cv.tolist()]
+    lr_metrics["cv_mean"] = round(lr_cv.mean(), 4)
+    print(f"  CV scores: {lr_metrics['cv_scores']}")
+    print(f"  CV mean:   {lr_metrics['cv_mean']}")
+    print(f"  Accuracy:  {lr_metrics['accuracy']}")
+    print(f"  Precision: {lr_metrics['precision']}")
+    print(f"  Recall:    {lr_metrics['recall']}")
+    print(f"  F1 Score:  {lr_metrics['f1_score']}")
+
+    metrics_all["logistic_regression"] = lr_metrics
+
+    # ------------------------------------------------------------------
+    # 4. Save models
+    # ------------------------------------------------------------------
+    print("\nSaving models...")
+    joblib.dump(rf, "models/random_forest_model.pkl")
+    joblib.dump(lr, "models/logistic_regression_model.pkl")
+    joblib.dump(feature_names, "models/model_features.pkl")
+
+    # Keep backward-compatible alias
+    joblib.dump(rf, "models/churn_model.pkl")
+    print("  Saved: models/random_forest_model.pkl")
+    print("  Saved: models/logistic_regression_model.pkl")
+    print("  Saved: models/model_features.pkl")
+    print("  Saved: models/churn_model.pkl (backward-compatible alias)")
+
     print("\nTraining completed successfully.")
 
 
