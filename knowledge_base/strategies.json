@@ -1,0 +1,27 @@
+{
+  "low_sessions": [
+    "Offer daily login rewards",
+    "Send reminder notifications",
+    "Introduce limited-time events"
+  ],
+  "short_duration": [
+    "Provide bonus XP for longer sessions",
+    "Unlock new missions",
+    "Add interactive challenges"
+  ],
+  "low_progress": [
+    "Reduce difficulty temporarily",
+    "Provide tutorial hints",
+    "Offer achievement incentives"
+  ],
+  "no_purchases": [
+    "Offer discount coupons",
+    "Provide free starter packs",
+    "Introduce loyalty rewards"
+  ],
+  "declining_activity": [
+    "Send a personalized comeback offer",
+    "Highlight new content patches",
+    "Pair with a mentor or active co-op buddy"
+  ]
+}
