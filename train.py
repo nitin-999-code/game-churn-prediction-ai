@@ -113,6 +113,14 @@ def main():
     print("  Saved: models/model_features.pkl")
     print("  Saved: models/churn_model.pkl (backward-compatible alias)")
 
+    # ------------------------------------------------------------------
+    # 5. Save metrics
+    # ------------------------------------------------------------------
+    print("\nSaving metrics...")
+    with open("metrics.json", "w") as f:
+        json.dump(metrics_all, f, indent=2)
+    print("  Saved: metrics.json")
+
     print("\nTraining completed successfully.")
 
 
