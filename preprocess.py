@@ -14,6 +14,7 @@ Functions:
 
 # Commit 1: Initial preprocessing setup
 # Commit 2: Added data handling functions
+# Commit 3: Implemented feature alignment
 
 import pandas as pd
 import numpy as np
