@@ -1,0 +1,30 @@
+{
+  "random_forest": {
+    "accuracy": 0.9445,
+    "precision": 0.9146,
+    "recall": 0.8659,
+    "f1_score": 0.8896,
+    "cv_scores": [
+      0.9447,
+      0.9433,
+      0.9458,
+      0.9469,
+      0.9415
+    ],
+    "cv_mean": 0.9444
+  },
+  "logistic_regression": {
+    "accuracy": 0.8741,
+    "precision": 0.8039,
+    "recall": 0.677,
+    "f1_score": 0.735,
+    "cv_scores": [
+      0.8747,
+      0.8801,
+      0.8772,
+      0.8774,
+      0.8766
+    ],
+    "cv_mean": 0.8772
+  }
+}
